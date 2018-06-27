@@ -7,7 +7,7 @@
     var world = require('../modules/world.js');
     var line  =require('../modules/line.js')
     var locationConfig = require('../modules/positionConfig.js');
-    var routerCalculate = require('../modules/hexin.js');
+    var routerCalculate = require('../modules/routers.js');
     locationConfig.calculate();
     var Sprite  = Laya.Sprite;
     var Stage   = Laya.Stage;
