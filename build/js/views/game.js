@@ -44,23 +44,23 @@
     //playSection.graphics.drawLines(0,0,[300,800,32.5,318],'#ff0000',4);
     //var balls=[[1,1,1,1,1,1],[0,1,1,1,1],[1,0,1,1,1,1],[1,0,1,1,1],[1,1,0,1,1,1],[1,0,1,1,1],[1,1,0,1,1,1],[1,0,1,1,1],[0,0,0,0,0,0]];
     //routerCalculate(balls,locationConfig.location,newLine._routers);
-    Laya.loader.load("../../images/timg.jpeg", Laya.Handler.create(this, function(res)
-    {
-        var ball = require('../modules/ball.js');
-        //var world = require('../modules/world.js');
-        var t = Laya.loader.getRes("../../images/timg.jpeg");
-        var spe = new laya.display.Sprite();
-        spe.height = 50;
-        spe.width =50;
-        spe.graphics.drawTexture(t, 0, 0,50,50);
-        playSection.addChild(spe);
-        spe.pos(0, 0);
-        spe.on('mousedown',this,function(){
-            var Ball = new ball();
-            playSection.addChild(Ball);
-            World.addToWorld(Ball);
-        })
-    }));
+    //Laya.loader.load("../../images/timg.jpeg", Laya.Handler.create(this, function(res)
+    //{
+    //    var ball = require('../modules/ball.js');
+    //    //var world = require('../modules/world.js');
+    //    var t = Laya.loader.getRes("../../images/timg.jpeg");
+    //    var spe = new laya.display.Sprite();
+    //    spe.height = 50;
+    //    spe.width =50;
+    //    spe.graphics.drawTexture(t, 0, 0,50,50);
+    //    playSection.addChild(spe);
+    //    spe.pos(0, 0);
+    //    spe.on('mousedown',this,function(){
+    //        var Ball = new ball();
+    //        playSection.addChild(Ball);
+    //        World.addToWorld(Ball);
+    //    })
+    //}));
     //复盘布局小球的位置
     function renderBall(){
         window.balls=[[1,1,1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
@@ -97,17 +97,19 @@
                 var a = (800-localPoint.y)/(325-localPoint.x);
                 var angle = Math.atan(a)*180/Math.PI;
             }
+            //画线
             var newLine = new line({
                 parent:playSection,
                 angle:angle
             })
             newLine.drawLine();
-            //var balls=[[1,1,1,1,1,1],[0,1,1,1,1],[1,0,1,1,1,1],[1,0,1,1,1],[1,1,0,1,1,1],[1,0,1,1,1],[1,1,0,1,1,1],[1,0,1,1,1],[0,0,0,0,0,0]];
-            var routers = routerCalculate(balls,locationConfig.location,newLine._routers);
+            //计算路径
+            var routers = routerCalculate(locationConfig.location,newLine._routers);
             lanchBall(routers);
             console.log(routers);
         })
     }
+    //发射小球
     function lanchBall(routers){
         var realIntersectLayer= routers.ballLayer;
         balls[realIntersectLayer.y][realIntersectLayer.x] =1;
