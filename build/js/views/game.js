@@ -8,6 +8,7 @@
     var line  =require('../modules/line.js')
     var locationConfig = require('../modules/positionConfig.js');
     var routerCalculate = require('../modules/routers.js');
+    var getEliminateData = require('../modules/eliminate.js');
     locationConfig.calculate();
     var Sprite  = Laya.Sprite;
     var Stage   = Laya.Stage;
@@ -63,19 +64,22 @@
     //}));
     //复盘布局小球的位置
     function renderBall(){
-        window.balls=[[1,1,1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
-        //for(var ){
+        var balls = CONFIG.balls;
+        //window.balls=[[1,1,1,1,1,1,1,1,1,1],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
         for(var i= 0;i<balls.length;i++){
             for(var j =0;j<balls[i].length;j++){
-                if(!!balls[i][j]){
+                if(!!balls[i][j].status){
                     var Ball = new ball({
                         speed:0,
                         angle:0,
                         x:locationConfig.location[i][j][0],
                         y:locationConfig.location[i][j][1],
-
+                        color:balls[i][j].color,
+                        type:balls[i][j].type
                     });
                     playSection.addChild(Ball);
+                    balls[i][j]._ball = Ball;
+                    console.log(balls[i][j]._ball);
                     //World.addToWorld(Ball);
                 }
             }
@@ -111,12 +115,21 @@
     }
     //发射小球
     function lanchBall(routers){
+        var balls = CONFIG.balls;
         var realIntersectLayer= routers.ballLayer;
-        balls[realIntersectLayer.y][realIntersectLayer.x] =1;
+        //balls[realIntersectLayer.y][realIntersectLayer.x].status =1;
         var Ball = new ball({
+            type:1,
+            color:'green',
             x:325,
             y:800
         });
+        balls[realIntersectLayer.y][realIntersectLayer.x] ={
+            status:1,
+            color:'green',
+            type:1,
+            _ball:Ball
+        }
         var routerIndex =0;
         playSection.addChild(Ball);
         animation();
@@ -127,11 +140,29 @@
             },200,'',laya.utils.Handler.create(this,function(){
                 routerIndex += 1;
                 if(routerIndex >(routers.routers.length-1)){
+                    var location = {x:realIntersectLayer.x,y:realIntersectLayer.y};
+                    var type = locationConfig.location[realIntersectLayer.y].length%2?'odd':'even';
+                    var color = 'green'
+                    var data = getEliminateData(location,type,color);
+                    console.log('getEliminateData',data);
+                    if(data.length>=3){
+                        eliminate(data);
+                    }
+                    //eliminate(data);
                     return
                 }else{
                     animation()
                 }
             }))
+        }
+    }
+    function eliminate(data){
+        var balls = CONFIG.balls;
+        for(var i = 0;i<data.length;i++){
+            var x = data[i]['x'];
+            var y = data[i]['y'];
+            balls[y][x]._ball.destroy();
+            balls[y][x] ={};
         }
     }
 

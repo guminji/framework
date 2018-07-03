@@ -18,9 +18,10 @@ class ball extends laya.ui.Component{
         var positionX = !!params&&params.x?params.x:this.stage.width/2;
         var positionY = !!params&&params.y?params.y:this.stage.height;
         this.pos(positionX, positionY);
-        Laya.loader.load("../../images/ball.png", Laya.Handler.create(this, function(res)
+        var ballName = this.switchBall(params.type,params.color);
+        Laya.loader.load("../../images/"+ballName, Laya.Handler.create(this, function(res)
         {
-            var t = Laya.loader.getRes("../../images/ball.png");
+            var t = Laya.loader.getRes("../../images/"+ballName);
             this.graphics.drawTexture(t, 0, 0,65,65);
             //Laya.stage.addChild(this);
             //this.pos(this.stage.width/2, this.stage.height);
@@ -31,6 +32,13 @@ class ball extends laya.ui.Component{
     }
     setSpeed(speed){
         this.speed = speed;
+    }
+    switchBall(type,color){
+        if(type == 1 ){
+            return color + 'Ball.png'
+        }else{
+            return type+'Ball.png'
+        }
     }
     run(time) {
         if (!this.angle || !this.speed) return;
