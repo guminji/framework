@@ -5,6 +5,6 @@
 window.CONFIG = {}
 window.CONFIG.balls = require('../modules/fakeBallData.js');//可视界面泡泡布局
 //主逻辑
-require('../views/game.js');
+require('../views/newGame.js');
 //window.balls = require('../modules/fakeBallData.js')
 

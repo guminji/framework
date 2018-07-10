@@ -1,15 +1,14 @@
 /**
- * Created by guminji on 2018/6/13.
+ * Created by guminji on 2018/7/10.
  */
 (function()
 {
     var ball = require('../modules/ball.js');
     var world = require('../modules/world.js');
     var line  =require('../modules/line.js')
-    var locationConfig = require('../modules/positionConfig.js');
     var routerCalculate = require('../modules/routers.js');
     var getEliminateData = require('../modules/eliminate.js');
-    locationConfig.calculate();
+    var playSection = require('../views/playSection.js');
     var Sprite  = Laya.Sprite;
     var Stage   = Laya.Stage;
     var Texture = Laya.Texture;
@@ -29,39 +28,12 @@
     Laya.stage.width =750;
     //showApe();
     var World = new world();
-    var playSection = new laya.ui.Component();
-    playSection.graphics.drawRect(0,0,65*10,800,'#ffffff');
-    playSection.width = 65*10;
-    playSection.height =800;
-    Laya.stage.addChild(playSection);
-    bindEvent(playSection);
-    renderBall();
-    //var newLine = new line({
-    //    parent:playSection,
-    //    angle:60
-    //})
-    //newLine.drawLine();
-
-    //playSection.graphics.drawLines(0,0,[300,800,32.5,318],'#ff0000',4);
-    //var balls=[[1,1,1,1,1,1],[0,1,1,1,1],[1,0,1,1,1,1],[1,0,1,1,1],[1,1,0,1,1,1],[1,0,1,1,1],[1,1,0,1,1,1],[1,0,1,1,1],[0,0,0,0,0,0]];
-    //routerCalculate(balls,locationConfig.location,newLine._routers);
-    //Laya.loader.load("../../images/timg.jpeg", Laya.Handler.create(this, function(res)
-    //{
-    //    var ball = require('../modules/ball.js');
-    //    //var world = require('../modules/world.js');
-    //    var t = Laya.loader.getRes("../../images/timg.jpeg");
-    //    var spe = new laya.display.Sprite();
-    //    spe.height = 50;
-    //    spe.width =50;
-    //    spe.graphics.drawTexture(t, 0, 0,50,50);
-    //    playSection.addChild(spe);
-    //    spe.pos(0, 0);
-    //    spe.on('mousedown',this,function(){
-    //        var Ball = new ball();
-    //        playSection.addChild(Ball);
-    //        World.addToWorld(Ball);
-    //    })
-    //}));
+    var myplaySection = new playSection({
+        renderData:CONFIG.balls
+    });
+    Laya.stage.addChild(myplaySection);
+    //bindEvent(playSection);
+    //renderBall();
     //复盘布局小球的位置
     function renderBall(){
         var balls = CONFIG.balls;
