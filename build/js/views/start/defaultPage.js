@@ -1,5 +1,6 @@
 import Sail from "../../libs/sail/sail";
 import StartUI from "../components/startui";
+var playSection = require('../room/playSection.js');
 
 class defaultPage extends Sail.Page {
     constructor() {
@@ -10,8 +11,10 @@ class defaultPage extends Sail.Page {
 
     onEnter () {
         //this.addChild(new ui.start.startUI);
-        this.startui = new StartUI;
-        this.addChild(this.startui);
+        //this.startui = new StartUI;
+        this.addChild(new playSection({
+            renderData:CONFIG.balls
+        }));
     }
     onExit () {
     }
