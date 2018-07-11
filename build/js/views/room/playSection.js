@@ -67,9 +67,9 @@ class playSection extends laya.ui.Box{
     //渲染可视界面
     renderSection(){
         //渲染背景
-        this.bg = new laya.display.Sprite();
-        this.setBg(this.bg);
-        this.addChild(this.bg);
+        //this.bg = new laya.display.Sprite();
+        //this.setBg(this.bg);
+        //this.addChild(this.bg);
         //渲染炮台
         this.Battery = new battery();
         this.addChild(this.Battery);
@@ -145,7 +145,7 @@ class playSection extends laya.ui.Box{
                     var location = {x:realIntersectLayer.x,y:realIntersectLayer.y};
                     var type = self.positionConfig.location[realIntersectLayer.y].length%2?'odd':'even';
                     var color = 'green';
-                    var data = getEliminateData(location,type,color);
+                    var data = getEliminateData(location,type,color,self.renderData);
                     console.log('getEliminateData',data);
                     if(data.length>=3){
                         self.eliminate(data);

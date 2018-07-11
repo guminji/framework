@@ -2,10 +2,10 @@
  * Created by guminji on 2018/6/29.
  */
 var ballsConifg = CONFIG.balls;
-function getData(location,type,color){
+function getData(location,type,color,renderData){
     var linkedBall  = [];
     var ballsChecked = [[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}]];
-    eliminate(location,type,color,ballsChecked);
+    eliminate(location,type,color,ballsChecked,renderData);
     for(var i =0;i<ballsChecked.length;i++){
         for(var j =0;j<ballsChecked[i].length;j++){
             if(ballsChecked[i][j].checked){
@@ -22,12 +22,12 @@ function getData(location,type,color){
  *@param {string} type even为双数行 odd为单数行
  *@return {array} 需要消除的球的数组
  */
-function eliminate(location,type,color,ballsChecked){
-    var otherBalls = getOtherBalls(location,type,color,ballsChecked);
+function eliminate(location,type,color,ballsChecked,renderData){
+    var otherBalls = getOtherBalls(location,type,color,ballsChecked,renderData);
     ballsChecked[location.y][location.x].checked =1;
     if(otherBalls.length>=0){
         for(var i = 0;i<otherBalls.length;i++){
-            eliminate(otherBalls[i].location,otherBalls[i].type,otherBalls[i].color,ballsChecked);
+            eliminate(otherBalls[i].location,otherBalls[i].type,otherBalls[i].color,ballsChecked,renderData);
         }
     }
 }
@@ -100,29 +100,9 @@ function getOtherBalls(location,type,color,ballsChecked){
         var x = otherBallsLocations[i].x;
         var y = otherBallsLocations[i].y;
         if(y>=0&&y<=9){
-            if(type=='even'){
-                if(y == location.y &&(x>=0&&x<=9)){
+            if(type=='odd'){
+                if(y == location.y &&(x>=0&&x<=10)){
                     if(!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)&&!ballsChecked[y][x].checked){
-                        balls.push({
-                            location:{x:x,y:y},
-                            type:'even',
-                            color:color
-                        })
-                    }
-                }else{
-                    if((x>=0&&x<=8)&&!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)){
-                        if(!!ballsConifg[y][x].status&&!ballsChecked[y][x].checked){
-                            balls.push({
-                                location:{x:x,y:y},
-                                type:'odd',
-                                color:color
-                            })
-                        }
-                    }
-                }
-            }else{
-                if(y == location.y){
-                    if((x>=0&&x<=8)&&!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)&&!ballsChecked[y][x].checked){
                         balls.push({
                             location:{x:x,y:y},
                             type:'odd',
@@ -130,10 +110,30 @@ function getOtherBalls(location,type,color,ballsChecked){
                         })
                     }
                 }else{
-                    if(!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)&&!ballsChecked[y][x].checked){
+                    if((x>=0&&x<=9)&&!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)){
+                        if(!!ballsConifg[y][x].status&&!ballsChecked[y][x].checked){
+                            balls.push({
+                                location:{x:x,y:y},
+                                type:'even',
+                                color:color
+                            })
+                        }
+                    }
+                }
+            }else{
+                if(y == location.y){
+                    if((x>=0&&x<=9)&&!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)&&!ballsChecked[y][x].checked){
                         balls.push({
                             location:{x:x,y:y},
                             type:'even',
+                            color:color
+                        })
+                    }
+                }else{
+                    if(!!ballsConifg[y][x].status&&(ballsConifg[y][x].color == color)&&!ballsChecked[y][x].checked){
+                        balls.push({
+                            location:{x:x,y:y},
+                            type:'odd',
                             color:color
                         })
                     }
