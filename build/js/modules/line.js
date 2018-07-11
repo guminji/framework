@@ -16,7 +16,7 @@ class line{
     initData(params){
         this.angle = params.angle;//发射的初始角度
         this.startX = params.parent.width/2; //发射的初始x坐标
-        this.startY = params.parent.height; //发射的初始y坐标
+        this.startY = 847; //发射的初始y坐标
         this.containerWidth = this.parent.width; //容器的宽度
         this.containerHeight = this.parent.height; //容器的高度
         this._routers = [[this.startX,this.startY]]; //所有交点的坐标组 用于计算碰撞和画出小球的轨迹
@@ -28,7 +28,7 @@ class line{
             points.push(this._routers[i][0],this._routers[i][1]);
 
         }
-        this.parent.graphics.drawLines(0,0,points,'#ff0000',4);
+        this.parent.graphics.drawLines(0,0,points,'#000000',10);
 
     }
     //计算线路

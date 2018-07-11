@@ -10,8 +10,8 @@ var locationConfig = require('../modules/positionConfig.js');//小球的默认�
 //核心算法 计算小球实际最后的运动轨迹
 //@params locationsConfig Array //小球的默认坐标
 //@params routers Array 直线轨迹
-function routerCalculate(locationsConfig,routers){
-    var locations =window.CONFIG.balls; //小球的占位信息
+function routerCalculate(locationsConfig,routers,locations){
+    //var locations =window.CONFIG.balls; //小球的占位信息
     var fakeIntersect = []; //相交但是不占位的球
     var realIntersect = []; //真实相交的第一个球
     var intersectIndex = 0;//在第几个交点上相切
@@ -132,7 +132,7 @@ function getballLocation(fakeIntersect,realIntersect){
             }
         //下一行相交未占位的球
         }else if((fakeIntersect[i].layer.y-1) == realIntersect[0].layer.y){
-            if(realIntersect[0].type == 'even'){
+            if(realIntersect[0].type == 'odd'){
                 if((fakeIntersect[i].layer.x == (realIntersect[0].layer.x-1)) ||fakeIntersect[i].layer.x == realIntersect[0].layer.x){
                     ballLocation[0] = fakeIntersect[i].coordinate.x;
                     ballLocation[1] = fakeIntersect[i].coordinate.y;

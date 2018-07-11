@@ -19,9 +19,9 @@ class ball extends laya.ui.Component{
         var positionY = !!params&&params.y?params.y:this.stage.height;
         this.pos(positionX, positionY);
         var ballName = this.switchBall(params.type,params.color);
-        Laya.loader.load("../../images/"+ballName, Laya.Handler.create(this, function(res)
+        Laya.loader.load("../../images/balls/"+ballName, Laya.Handler.create(this, function(res)
         {
-            var t = Laya.loader.getRes("../../images/"+ballName);
+            var t = Laya.loader.getRes("../../images/balls/"+ballName);
             this.graphics.drawTexture(t, 0, 0,65,65);
             //Laya.stage.addChild(this);
             //this.pos(this.stage.width/2, this.stage.height);
