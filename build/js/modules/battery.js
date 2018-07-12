@@ -6,11 +6,8 @@ var tools = require('./tools');
 class battery extends laya.ui.Box{
     constructor(){
         super();
-        //this.anchorX = 0.5;
         this.height = 185;
         this.width = 384;
-        //this.pivotX = 192,
-        //this.pivotY = 92.5,
         this.anchorX = 0.5,
         this.renderLayout();
     }
@@ -39,7 +36,7 @@ class battery extends laya.ui.Box{
         //this.setBg(batteryBottom,'../../images/batteryBottom.png',384,185)
         this.addChild(batteryBottom);
         this.setBg(batteryBottom,'../../images/batteryBottom.png',384,185)
-        this.turnBattery(-30);
+        this.turnBattery(0);
     }
     //炮台转向
     turnBattery(angle){

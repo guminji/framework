@@ -5,12 +5,13 @@
 //核心算法
 
 var ballLayer ={};//小球最后的行数 行数和列数
-var locationConfig = require('../modules/positionConfig.js');//小球的默认位置
+var locationConfig = '';//小球的默认位置
 
 //核心算法 计算小球实际最后的运动轨迹
 //@params locationsConfig Array //小球的默认坐标
 //@params routers Array 直线轨迹
 function routerCalculate(locationsConfig,routers,locations){
+    locationConfig = locationsConfig;
     //var locations =window.CONFIG.balls; //小球的占位信息
     var fakeIntersect = []; //相交但是不占位的球
     var realIntersect = []; //真实相交的第一个球
@@ -95,12 +96,31 @@ function routerCalculate(locationsConfig,routers,locations){
             }
         }
     }
+    //如果没有相交的点
+    if(!realIntersect.length){
+        for(var z =0;z<locationsConfig[0].length;z++){
+            var distance = getDistance(routers[routers.length-2],routers[routers.length-1],locationsConfig[0][z]);
+            if(distance<32.5&&!locations[0][z].status){
+                routers[routers.length-1] = locationsConfig[0][z];
+                return {
+                    ballLayer:{
+                        x:z,
+                        y:0
+                    },
+                    routers:routers
+                }
+            }
+        }
+    }
 
 }
 //计算最后得到小球运动轨迹
 function lastCalculate(fakeIntersect,realIntersect,intersectIndex,routers){
     //获取最后小球落于哪个坐标
     var realLocation = getballLocation(fakeIntersect,realIntersect);
+    if(!realLocation){
+        return '';
+    }
     var routers = routers.slice(0,intersectIndex+1);
     //修正最后一个点的坐标
     routers[routers.length-1] = realLocation;
@@ -154,11 +174,15 @@ function getballLocation(fakeIntersect,realIntersect){
     }
     //一些特殊角度交到了双数的一排边 然后最近的相交球在下面1层
     if(!ballLocation.length){
+
         var x = realIntersect[0].layer.x;
         var y = realIntersect[0].layer.y+2;
+        if(y>2){
+            return
+        }
         ballLayer.x =x;
         ballLayer.y =y;
-        return [locationConfig.location[y][x][0],locationConfig.location[y][x][1]];
+        return [locationConfig[y][x][0],locationConfig[y][x][1]];
     }
     //return locationsConfig[];
 }

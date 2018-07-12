@@ -4,7 +4,7 @@
 var ballsConifg = CONFIG.balls;
 function getData(location,type,color,renderData){
     var linkedBall  = [];
-    var ballsChecked = [[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}],[{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0},{checked:0}]];
+    var ballsChecked = initBallChecked(renderData);
     eliminate(location,type,color,ballsChecked,renderData);
     for(var i =0;i<ballsChecked.length;i++){
         for(var j =0;j<ballsChecked[i].length;j++){
@@ -14,6 +14,27 @@ function getData(location,type,color,renderData){
         }
     }
     return linkedBall;
+}
+/**
+ *@method 初始化递归泡泡数组 用于遍历泡泡是否被递推过
+ *@for
+ *@param {array} lcation [x,y] x是列数 y是行数
+ *@param {string} type even为双数行 odd为单数行
+ *@return {array} 需要消除的球的数组
+ */
+function initBallChecked(renderData){
+    var ballsChecked =[];
+    for(var i=0;i<renderData.length;i++){
+        var layerData = [];
+        for(var j = 0;j<renderData[i].length;j++){
+            layerData.push({
+                checked:0
+            });
+        }
+        ballsChecked.push(layerData)
+
+    }
+    return ballsChecked;
 }
 /**
  *@method 消除方法
@@ -41,7 +62,7 @@ function eliminate(location,type,color,ballsChecked,renderData){
 function getOtherBalls(location,type,color,ballsChecked){
     var balls = [];
     var otherBallsLocations;
-    if(type == 'even'){
+    if(type == 'odd'){
         otherBallsLocations =[
             {
                 x:location.x-1,

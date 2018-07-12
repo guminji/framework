@@ -12,9 +12,10 @@ class defaultPage extends Sail.Page {
     onEnter () {
         //this.addChild(new ui.start.startUI);
         //this.startui = new StartUI;
-        this.addChild(new playSection({
+        window.playSection1 = new playSection({
             renderData:CONFIG.balls
-        }));
+        })
+        this.addChild(playSection1);
     }
     onExit () {
     }

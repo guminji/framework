@@ -13,6 +13,7 @@ class ball extends laya.ui.Component{
         this.paintBall(params);
     }
     paintBall(params){
+        this.color = params.color;
         this.speed = (!!params&&(!!params.speed||params.speed ==0))?params.speed:500;//初始化速度
         this.angle = (!!params&&(!!params.angle||params.angle ==0))?params.angle:30
         var positionX = !!params&&params.x?params.x:this.stage.width/2;

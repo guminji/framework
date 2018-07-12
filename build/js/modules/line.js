@@ -28,8 +28,7 @@ class line{
             points.push(this._routers[i][0],this._routers[i][1]);
 
         }
-        this.parent.graphics.drawLines(0,0,points,'#000000',10);
-
+        this.parent.graphics.drawLines(0,0,points,'#ffffff',1);
     }
     //计算线路
     calculateRouter(){
