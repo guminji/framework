@@ -5,7 +5,7 @@
 class positionConfig{
     constructor(){
         this.ballDiameter = 65;//小球直径
-        this.layerNum = 10;//泡泡最多层数
+        this.layerNum = 11;//泡泡最多层数
         this.ballsNum = 11;//最多每行泡泡的数目
         this.Type = 'odd';//第一层的奇偶性 odd奇数 even偶数
         this.yDistance = '';//每一排相差的距离

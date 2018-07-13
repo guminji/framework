@@ -129,7 +129,7 @@ function getOtherBalls(location,type,ballsChecked,renderData){
     for(var i=0;i<otherBallsLocations.length;i++){
         var x = otherBallsLocations[i].x;
         var y = otherBallsLocations[i].y;
-        if(y>=0&&y<=9){
+        if(y>=0&&y<=10){
             if(type=='odd'){
                 if(y == location.y &&(x>=0&&x<=10)){
                     if(!!ballsConifg[y][x].status&&!ballsChecked[y][x].checked){
