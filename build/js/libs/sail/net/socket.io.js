@@ -1,4 +1,6 @@
 import {extend} from "../utils/utils";
+import {Base64} from "./base64.js";
+
 var token = null;
 var DEFAULT_CONFIG = {
     "force new connection" : true
