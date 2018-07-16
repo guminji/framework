@@ -50,8 +50,8 @@ class game {
         if(Utils.getUrlParam("debug_status") == "1"){
             this.DEBUG = true;
         }else{
-            this.DEBUG = false;
-            window.console && (console.log = console.trace = console.error = function () {});
+            //this.DEBUG = false;
+            //window.console && (console.log = console.trace = console.error = function () {});
         }
 
         this.director = new Director(Config.DIALOGTYPE);

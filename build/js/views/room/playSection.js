@@ -10,6 +10,8 @@ var getEliminateData = require('../../modules/eliminate.js');
 var getFallData = require('../../modules/fall.js');
 var line  =require('../../modules/line.js');
 var storeData = require('../../modules/storeData.js');
+var bubbleUtils = require('../../modules/bubbleUtils.js');
+var specialPlay = require('../../modules/specialPlay.js');
 
 //可视游戏区域
 class playSection extends laya.ui.Box{
@@ -156,6 +158,12 @@ class playSection extends laya.ui.Box{
             _ball:this.readyBall
         }
         var routerIndex =0;
+        var betweenBalls = bubbleUtils.getBetween({
+            x:realIntersectLayer.x,
+            y:realIntersectLayer.y,
+            parity:this.getParity(this.renderData[realIntersectLayer.y])
+        },2)
+        console.log('betweenBalls',betweenBalls);
         //this.addChild(Ball);
         //window.endTime =new Date().getTime();
         //console.log('消耗时间2',endTime - startTime);
@@ -175,6 +183,14 @@ class playSection extends laya.ui.Box{
                     if(data.length>=3){
                         self.eliminate(data);
                     }
+                    var special = new specialPlay({
+                        renderData:self.renderData,
+                        ballData:{
+                            x:realIntersectLayer.x,
+                            y:realIntersectLayer.y,
+                            parity:self.getParity(self.renderData[realIntersectLayer.y])
+                        }
+                    });
                     //需要掉落的小球计算
                     var fallDataType = self.positionConfig.location[0].length%2?'odd':'even';
                     var fallData = getFallData(location,fallDataType,self.renderData);
@@ -188,6 +204,10 @@ class playSection extends laya.ui.Box{
                 }
             }))
         }
+    }
+    //获取该行的奇偶性
+    getParity(layer){
+        return layer.length%2?'odd':'even';
     }
     //消除小球
     eliminate(data){

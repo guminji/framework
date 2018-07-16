@@ -75,17 +75,16 @@ fakeBallData =[
         status:1,
         type:2
     },{
-        color:'red',
         status:1,
-        type:1,
+        type:2,
     },{
         color:'green',
         status:1,
         type:1
     },{
-        color:'red',
+        color:'green',
         status:1,
-        type:1,
+        type:1
     },{
         color:'blue',
         status:1,
