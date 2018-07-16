@@ -29,6 +29,7 @@
 import Sail from "../libs/sail/sail";
 import StartScene from "./start/start";
 
+
 const GAME_CONFIG = {
     WIDTH       : 750,
     HEIGHT      : 1334,
@@ -38,8 +39,14 @@ const GAME_CONFIG = {
     VERSION     : "IMG_VERSION",
     BASE_PATH   : ""
 }
+const IO_CONFIG = {
+    "type" : "socket",
+    "URL"  : websocketurl,
+    "token": token
+}
 
 Sail.onStart = function () {
+    Sail.io.init(IO_CONFIG,Sail.io.ERROR);
     Sail.director.runScene(new StartScene());
 }
 
