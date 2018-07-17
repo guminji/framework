@@ -87,7 +87,7 @@ class IOPrimus {
             IO_DATA.token = parsedData.res;
         }
 
-        // Sail.DEBUG && console.log("命令：" + parsedData.cmd + "\n<<<=====接收到'IO-Primus'数据, 时间:" + Date.now() + "\n" + dataString);
+        console.log("命令：" + parsedData.cmd + "\n<<<=====接收到'IO-Primus'数据, 时间:" + Date.now() + "\n" + dataString);
         this.callback(parsedData.cmd, parsedData.res || parsedData.rep, parsedData.code, parsedData.error || parsedData.msg);
     }
     connect () {
@@ -118,7 +118,7 @@ class IOPrimus {
         var data = JSON.stringify(DATA_TEMPLATE);
 
         // Sail.DEBUG && console.log("====>>发送命令：" + cmd + ", 时间:" + Date.now() + ", 命令类型：'IO-Primus'\n数据：" + data);
-
+        console.log("====>>发送命令：" + cmd + ", 时间:" + Date.now() + ", 命令类型：'IO-Primus'\n数据：" + data);
         //加密
         var encryptData = CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(IO_DATA._commKey), {
             mode: CryptoJS.mode.ECB,

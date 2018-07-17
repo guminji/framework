@@ -7,6 +7,8 @@
 
 import Sail from "../libs/sail/sail";
 import StartScene from "./start/startScene";
+import CMD_CONFIG from "./config";
+
 
 
 const GAME_CONFIG = {
@@ -30,6 +32,7 @@ Sail.onStart = function () {
     Sail.io.register('io.open',this,function(){
         Sail.director.runScene(new StartScene());
     });
+    
 }
 
 Sail.run(GAME_CONFIG);
