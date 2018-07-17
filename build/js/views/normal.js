@@ -28,6 +28,7 @@
 //})();
 import Sail from "../libs/sail/sail";
 import StartScene from "./start/start";
+import CMD_CONFIG from "./config";
 
 
 const GAME_CONFIG = {
@@ -51,7 +52,9 @@ Sail.onStart = function () {
     Sail.director.runScene(new StartScene());
     Sail.io.register('io.open',this,function(){
         Sail.io.emit('helloWorld');
+        Sail.io.emit(CMD_CONFIG.HALL.toIn,{'roomId':18},"primus");
     });
+    
 }
 
 Sail.run(GAME_CONFIG);

@@ -13,7 +13,6 @@ class defaultPage extends Sail.Page {
     onEnter () {
         //this.addChild(new ui.start.startUI);
         //this.startui = new StartUI;
-        // Sail.io.emit(CMD_CONFIG.HALL.toIn,{'roomId':18},"primus");
         
         window.playSection1 = new playSection({
             renderData:CONFIG.balls
