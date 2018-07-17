@@ -8,7 +8,10 @@ class roomPage extends Sail.Page {
         super();
         this.startui = null;
         this.playSectionA  = '';
-        this.actions = {
+        this.registerActions()
+    }
+    registerActions(){
+        var actions ={
             'replay':function(params){
                 this.playSectionA = new playSection({
                     renderData:params.balls,
@@ -16,17 +19,12 @@ class roomPage extends Sail.Page {
                     layerBubble:params.layerBubble
                 })
             },
-        }
-    }
 
+        }
+        Sail.io.register(actions,this);
+    }
     onEnter () {
-        //this.addChild(new ui.start.startUI);
-        //this.startui = new StartUI;
-        // Sail.io.emit(CMD_CONFIG.HALL.toIn,{'roomId':18},"primus");
-        this.playSectionA = new playSection({
-            renderData:CONFIG.balls
-        })
-        this.addChild(this.playSectionA);
+        Sail.io.emit('replay')
     }
     onExit () {
     }

@@ -1,5 +1,5 @@
 import Sail from "../../libs/sail/sail";
-import defaultPage from "./startPage";
+import startPage from "./startPage";
 
 class StartScene extends Sail.Scene {
     constructor() {
@@ -7,7 +7,7 @@ class StartScene extends Sail.Scene {
     }
 
     onEnter () {
-        this.addPage(new defaultPage());
+        this.addPage(new startPage());
     }
     onExit () {
     }

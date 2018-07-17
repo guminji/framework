@@ -8,16 +8,22 @@ class startPage extends Sail.Page {
     constructor() {
         super();
         this.startui = null;
-        this.actions ={
+        this.registerActions();
+    }
+    registerActions(){
+        var actions ={
             'toIn':function(params){
                 console.log('进入房间!')
                 Sail.director.runScene(new roomScene());
             },
-        }
-    }
+            'getUserInfo':function(params){
 
+            },
+
+        }
+        Sail.io.register(actions,this);
+    }
     onEnter () {
-        Sail.io.register(this.actions,this);
         Sail.io.emit('toIn',{
             roomId:18
         });
