@@ -1,5 +1,5 @@
 import Sail from "../../libs/sail/sail";
-import defaultPage from "./defaultPage";
+import defaultPage from "./startPage";
 
 class StartScene extends Sail.Scene {
     constructor() {

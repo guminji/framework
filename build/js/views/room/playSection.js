@@ -31,6 +31,8 @@ class playSection extends laya.ui.Box{
     }
     //初始化可视区域的一些model数据
     initData(params){
+        storeData.launchBubble = params.launchBubble;
+        storeData.layerBubble = params.layerBubble;
         this.renderData = params.renderData; //小球的位置布局
         this.positionConfig = new initPosition(); //初始化小球的参考位置信息 x,y坐标
         this.positionConfigCalute();//可视区域面板数据 小球的位置

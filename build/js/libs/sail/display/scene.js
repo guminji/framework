@@ -29,8 +29,8 @@ class Scene extends Laya.View {
     }
 
     destroy () {
-        Laya.stage.off(Laya.Event.RESIZE, setSceneSize);
-        Laya.stage.off(Laya.Event.VISIBILITY_CHANGE, onVisibilityChange);
+        Laya.stage.off(Laya.Event.RESIZE, this.setSceneSize);
+        Laya.stage.off(Laya.Event.VISIBILITY_CHANGE, this.onVisibilityChange);
         super.destroy();
     }
 
