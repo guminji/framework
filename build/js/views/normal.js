@@ -43,7 +43,9 @@ const IO_CONFIG = {
     "type" : "primus",
     "URL"  : websocketurl,
     "jwt": jwt,
-    "publicKey": publicKey
+    "publicKey": publicKey,
+    'jwtToken':jwtToken,
+    'token':jwtToken
 }
 
 Sail.onStart = function () {
