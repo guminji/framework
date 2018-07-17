@@ -51,7 +51,6 @@ Sail.onStart = function () {
     Sail.io.init(IO_CONFIG,Sail.io.ERROR);
     Sail.director.runScene(new StartScene());
     Sail.io.register('io.open',this,function(){
-        Sail.io.emit('helloWorld');
         Sail.io.emit(CMD_CONFIG.HALL.toIn,{'roomId':18},"primus");
     });
     
