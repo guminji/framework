@@ -44,6 +44,7 @@ class specialPlay{
                 var y = item.y;
                 if(renderData[y][x].status&&renderData[y][x]._ball){
                     renderData[y][x]._ball.destroy(true);
+                    renderData[y][x] = {}
                 }
             })
         }
