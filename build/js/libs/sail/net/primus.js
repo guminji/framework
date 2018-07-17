@@ -84,7 +84,7 @@ class IOPrimus {
 
         //更新jwt token
         if(parsedData.cmd == cmd.CONN_INIT){
-            IO_DATA.jwtToken = parsedData.res;
+            IO_DATA.token = parsedData.res;
         }
 
         // Sail.DEBUG && console.log("命令：" + parsedData.cmd + "\n<<<=====接收到'IO-Primus'数据, 时间:" + Date.now() + "\n" + dataString);
@@ -106,8 +106,7 @@ class IOPrimus {
         var DATA_TEMPLATE = {
             "cmd" : cmd,
             "params" : {
-                "jwt" : IO_DATA.jwtToken,
-                "token" : IO_DATA.jwtToken
+                "jwt" : IO_DATA.token,
             },
             "status" : {
                 "time" : Date.now()

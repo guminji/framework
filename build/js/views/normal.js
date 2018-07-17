@@ -42,15 +42,16 @@ const GAME_CONFIG = {
 const IO_CONFIG = {
     "type" : "primus",
     "URL"  : websocketurl,
-    "jwt": jwt,
     "publicKey": publicKey,
-    'jwtToken':jwtToken,
-    'token':jwtToken
+    'token':token
 }
 
 Sail.onStart = function () {
     Sail.io.init(IO_CONFIG,Sail.io.ERROR);
     Sail.director.runScene(new StartScene());
+    Sail.io.register('io.open',this,function(){
+        Sail.io.emit('helloWorld');
+    });
 }
 
 Sail.run(GAME_CONFIG);
