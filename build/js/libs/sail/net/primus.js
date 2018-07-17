@@ -1,4 +1,5 @@
 import {extend} from "../utils/utils";
+import Viewer from "../event/viewer";
 
 const IO_DATA = {
     _commKey : null,		//res加密公钥所用到的key

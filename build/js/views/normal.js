@@ -40,9 +40,10 @@ const GAME_CONFIG = {
     BASE_PATH   : ""
 }
 const IO_CONFIG = {
-    "type" : "socket",
+    "type" : "primus",
     "URL"  : websocketurl,
-    "token": token
+    "jwt": jwt,
+    "publicKey": publicKey
 }
 
 Sail.onStart = function () {
