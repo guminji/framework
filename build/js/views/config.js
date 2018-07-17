@@ -1,5 +1,6 @@
 const CMD_CONFIG = {
     HALL:{
+        open:"io.open",
         toIn:"toIn"
     },
     ROOM:{
